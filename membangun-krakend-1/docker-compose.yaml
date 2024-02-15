@@ -1,0 +1,34 @@
+version: '3'
+networks:
+  krakend-net:
+    external: false
+
+services:
+  krakend:
+    container_name: krakend-api
+    image: devopsfaith/krakend
+    volumes:
+      - ./krakend:/etc/krakend
+    ports:
+      - 8000:8000
+      - 8080:8080
+    networks:
+      - krakend-net
+
+  keranjang-app:
+    build:
+      context: ./keranjang-service
+    container_name: keranjang-app
+    ports:
+      - 3001:3000
+    networks:
+      - krakend-net
+  
+  user-app:
+    build:
+      context: ./user-service
+    container_name: user-app
+    ports:
+      - 3002:3000
+    networks:
+      - krakend-net

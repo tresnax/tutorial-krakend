@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "output_encoding": "no-op",
+    "http_port": 8080,
+    "endpoints": [
+        {
+            "endpoint": "/keranjang",
+            "method": "GET",
+            "backend": [ 
+              { 
+                "url_pattern": "/",
+                "method": "GET",
+                "host": ["http://keranjang-app:3000"]
+            } 
+          ]
+        },
+        {
+            "endpoint": "/user",
+            "method": "GET",
+            "backend": [
+              {
+                "url_pattern": "/",
+                "method": "GET",
+                "host": ["http://user-app:3000"]
+            }
+          ]
+        }
+    ]
+  }
+  
