@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "output_encoding": "no-op",
+    "http_port": 8080,
+    "endpoints": [
+        {
+            "endpoint": "/kursus",
+            "method": "GET",
+            "extra_config": {
+                  "qos/ratelimit/router": {
+                    "@comment":"1 requests every 2 minutes",
+                    "max_rate": 2,
+                    "every": "1s"
+                  }
+            },
+            "concurrent_calls": 1,
+            "backend": [
+              {
+                "url_pattern": "/courses",
+                "method": "GET",
+                "host": ["http://course-service:3000"]
+            }
+          ]
+        }
+    ]
+}
